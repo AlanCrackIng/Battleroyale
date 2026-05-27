@@ -6,20 +6,22 @@ version("1.0.0")
 
 shared_scripts({
     "@ox_lib/init.lua",
+    "shared/**/*.lua",
 })
 
 client_scripts({
-	"client/**.lua"
+	"client/**/*.lua"
 })
 
-server_script({
-	"server/**.lua"
+server_scripts({
+	"server/**/*.lua"
 })
 
 files({
-	"shared/*.lua"
+	"shared/**/*.lua"
 })
 
-dependency({
-	"ox_lib"
+dependencies({
+	"ox_lib",
+	"ox_inventory"
 })
