@@ -18,7 +18,8 @@ server_scripts({
 })
 
 files({
-	"shared/**/*.lua"
+	"shared/**/*.lua",
+	"locales/*.json"
 })
 
 dependencies({
