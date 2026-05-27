@@ -18,7 +18,7 @@ end;
 ---@return void 
 function Module:SetDebugMode(enabled)
     self.Sphere:setDebug(enabled);
-end
+end;
 
 ---@return void
 function Module:RemoveZone()

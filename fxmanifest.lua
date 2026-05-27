@@ -17,7 +17,7 @@ server_script({
 })
 
 files({
-	"shared/config.lua"
+	"shared/*.lua"
 })
 
 dependency({
