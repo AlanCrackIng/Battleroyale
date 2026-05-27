@@ -6,6 +6,12 @@ local Config = {};
 ---@field radius number
 ---@field debug boolean
 
+---@class BattleroyaleConfigCommands
+---@field Join string
+---@field Leave string
+---@field Finish string
+---@field Announce string
+
 ---@class BattleroyaleLoadoutItem
 ---@field name string
 ---@field count number
@@ -17,8 +23,10 @@ local Config = {};
 
 ---@class BattleroyaleConfig
 ---@field Arena BattleroyaleConfigArena
+---@field Commands BattleroyaleConfigCommands
 ---@field Loadouts BattleroyaleLoadout[]
 ---@field AnnouncementDuration number
+---@field AnnouncementMaxLength number
 
 ---@type BattleroyaleConfig
 Config = {
@@ -27,6 +35,13 @@ Config = {
         spawn = vec4(0.0, 0.0, 72.0, 0.0), -- replace
         radius = 100.0, -- replace
         debug = true, -- replace
+    },
+
+    Commands = {
+        Join = "brjoin",
+        Leave = "brleave",
+        Finish = "brfinish",
+        Announce = "brannounce",
     },
 
     Loadouts = { -- temp data
@@ -72,6 +87,7 @@ Config = {
     },
 
     AnnouncementDuration = 8000, -- 8 seconds
+    AnnouncementMaxLength = 120,
 };
 
 return Config;
