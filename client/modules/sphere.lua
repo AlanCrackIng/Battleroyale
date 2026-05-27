@@ -3,12 +3,14 @@ Module.__index = Module;
 
 ---@param coords vector3
 ---@param radius number
+---@param onExit function|nil
 ---@return Module
-function Module:CreateSphereZone(coords, radius)
+function Module:CreateSphereZone(coords, radius, onExit)
     local self = setmetatable({}, Module);
     self.Sphere = lib.zones.sphere({
         coords = coords,
-        radius = radius;
+        radius = radius,
+        onExit = onExit,
     });
 
     return self;

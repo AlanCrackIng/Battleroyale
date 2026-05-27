@@ -20,6 +20,13 @@ function Module:Connect(cb)
 end;
 
 ---@return Module
+function Module:Register()
+    Registry:RegisterEvent(self.Name, self);
+
+    return self;
+end;
+
+---@return Module
 function Module:RegisterNetEvent()
     RegisterNetEvent(self.Name, function(...)
         for _, cb in pairs(self.Callbacks) do
@@ -27,9 +34,26 @@ function Module:RegisterNetEvent()
         end;
     end);
  
-    Registry:RegisterEvent(self.Name, self);
+    return self:Register();
+end;
 
-    return self;
+---@param target number
+---@param ... any
+---@return void
+function Module:FireClient(target, ...)
+    TriggerClientEvent(self.Name, target, ...);
+end;
+
+---@param ... any
+---@return void
+function Module:FireServer(...)
+    TriggerServerEvent(self.Name, ...);
+end;
+
+---@param ... any
+---@return void
+function Module:Fire(...)
+    TriggerEvent(self.Name, ...);
 end;
 
 return Module;
