@@ -1,6 +1,5 @@
 local Events = {};
 
-Events.Join = "battleroyale:server:join";
 Events.Leave = "battleroyale:server:leave";
 Events.Start = "battleroyale:client:start";
 Events.Finish = "battleroyale:client:finish";

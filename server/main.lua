@@ -1,11 +1,8 @@
 local Match = require("server.modules.match");
+local Commands = require("server.modules.commands");
 local ServerEvents = require("server.events");
 
-ServerEvents.Join:Connect(function()
-    local player = source;
-
-    Match:AddPlayer(player);
-end);
+Commands:Register();
 
 ServerEvents.Leave:Connect(function()
     local player = source;

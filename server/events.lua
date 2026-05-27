@@ -3,7 +3,6 @@ local Events = require("shared.events.names");
 
 local ServerEvents = {};
 
-ServerEvents.Join = Event.new(Events.Join):RegisterNetEvent();
 ServerEvents.Leave = Event.new(Events.Leave):RegisterNetEvent();
 ServerEvents.Start = Event.new(Events.Start):Register();
 ServerEvents.Finish = Event.new(Events.Finish):Register();
