@@ -1,0 +1,14 @@
+{
+    "title": "Battle Royale",
+    "finish_announcement": "The battle royale has finished.",
+    "announce_missing": "You need to provide an announcement.",
+    "announce_too_long": "Announcement cannot be longer than %s characters.",
+    "join_player_only": "Only players can join the battle royale.",
+    "join_already_in_match": "You are already in the battle royale.",
+    "join_no_loadouts": "No battle royale loadouts have been configured.",
+    "leave_not_in_match": "You are not in the battle royale.",
+    "announce_no_active_match": "There is no active battle royale.",
+    "announce_no_players": "There are no battle royale players to announce to.",
+    "finish_no_active_match": "There is no active battle royale to finish.",
+    "finish_no_players": "There are no battle royale players to finish."
+}

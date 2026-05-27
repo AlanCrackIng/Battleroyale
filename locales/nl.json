@@ -1,0 +1,14 @@
+{
+    "title": "Battle Royale",
+    "finish_announcement": "De battle royale is beëindigd.",
+    "announce_missing": "Je moet een aankondiging opgeven.",
+    "announce_too_long": "De aankondiging mag niet langer zijn dan %s tekens.",
+    "join_player_only": "Alleen spelers kunnen deelnemen aan de battle royale.",
+    "join_already_in_match": "Je zit al in de battle royale.",
+    "join_no_loadouts": "Er zijn geen battle royale loadouts geconfigureerd.",
+    "leave_not_in_match": "Je zit niet in de battle royale.",
+    "announce_no_active_match": "Er is geen actieve battle royale.",
+    "announce_no_players": "Er zijn geen battle royale spelers om naar te aankondigen.",
+    "finish_no_active_match": "Er is geen actieve battle royale om te beëindigen.",
+    "finish_no_players": "Er zijn geen battle royale spelers om te beëindigen."
+}
