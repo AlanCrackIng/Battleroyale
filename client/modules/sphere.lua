@@ -1,0 +1,28 @@
+local Module = {};
+Module.__index = Module;
+
+---@param coords vector3
+---@param radius number
+---@return Module
+function Module:CreateSphereZone(coords, radius)
+    local self = setmetatable({}, Module);
+    self.Sphere = lib.zones.sphere({
+        coords = coords,
+        radius = radius;
+    });
+
+    return self;
+end;
+
+---@param enabled boolean
+---@return void 
+function Module:SetDebugMode(enabled)
+    self.Sphere:setDebug(enabled);
+end
+
+---@return void
+function Module:RemoveZone()
+    self.Sphere:remove();
+end;
+
+return Module;

@@ -1,3 +1,3 @@
-local Config = {}
+local Config = {};
 
-return Config 
+return Config;
