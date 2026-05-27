@@ -11,7 +11,7 @@ ClientEvents.Finish:Connect(function(message)
 
     if message then
         lib.notify({
-            title = "Battle Royale",
+            title = locale("title"),
             description = message,
             type = "success",
             duration = Config.AnnouncementDuration,
@@ -21,7 +21,7 @@ end);
 
 ClientEvents.Announce:Connect(function(message)
     lib.notify({
-        title = "Battle Royale",
+        title = locale("title"),
         description = message,
         type = "inform",
         duration = Config.AnnouncementDuration,
