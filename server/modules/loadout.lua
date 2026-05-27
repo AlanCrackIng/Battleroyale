@@ -5,8 +5,12 @@ Module.__index = Module;
 
 math.randomseed(os.time());
 
----@return BattleroyaleLoadout
+---@return BattleroyaleLoadout|nil
 function Module:GetRandomLoadout()
+    if #Config.Loadouts <= 0 then
+        return nil;
+    end;
+
     local index = math.random(1, #Config.Loadouts);
 
     return Config.Loadouts[index];
