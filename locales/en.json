@@ -5,10 +5,14 @@
     "announce_too_long": "Announcement cannot be longer than %s characters.",
     "join_player_only": "Only players can join the battle royale.",
     "join_already_in_match": "You are already in the battle royale.",
+    "join_match_already_active": "There is already an active battle royale.",
+    "join_match_full": "The battle royale lobby is full.",
     "join_no_loadouts": "No battle royale loadouts have been configured.",
     "leave_not_in_match": "You are not in the battle royale.",
+    "match_cancelled_not_enough_players": "Not enough players to start. Waiting for more players to join.",
     "announce_no_active_match": "There is no active battle royale.",
     "announce_no_players": "There are no battle royale players to announce to.",
     "finish_no_active_match": "There is no active battle royale to finish.",
-    "finish_no_players": "There are no battle royale players to finish."
+    "finish_no_players": "There are no battle royale players to finish.",
+    "finish_last_player_standing": "Last player standing! The battle royale is over."
 }
