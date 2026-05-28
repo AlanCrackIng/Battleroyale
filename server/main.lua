@@ -20,6 +20,12 @@ ServerEvents.Death:Connect(function(killer)
     Match:EliminatePlayer(player, killer);
 end);
 
+ServerEvents.ZoneOut:Connect(function()
+    local player = source;
+
+    Match:EliminatePlayer(player, nil);
+end);
+
 AddEventHandler("playerDropped", function()
     local player = source;
 
