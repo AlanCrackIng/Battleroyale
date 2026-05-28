@@ -74,7 +74,7 @@ function Module:StartMatch()
         self.State.queuing = false;
         self.State.timer = nil;
 
-        self:Announce(locale("match_cancelled_not_enough_players"));
+        Announcer:SendToPlayers(self.State.players, locale("match_cancelled_not_enough_players"));
 
         return;
     end;
