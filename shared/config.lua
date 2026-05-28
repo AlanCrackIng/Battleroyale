@@ -27,6 +27,10 @@ local Config = {};
 ---@field Loadouts BattleroyaleLoadout[]
 ---@field AnnouncementDuration number
 ---@field AnnouncementMaxLength number
+---@field MinimumPlayers number
+---@field MaximumPlayers number
+---@field LobbyTimer number
+---@field ShortTimer number
 
 ---@type BattleroyaleConfig
 Config = {
@@ -88,6 +92,11 @@ Config = {
 
     AnnouncementDuration = 8000, -- 8 seconds
     AnnouncementMaxLength = 120,
+
+    MinimumPlayers = 5, 
+    MaximumPlayers = 30,
+    LobbyTimer = 60000, -- 1 minute, after which the match will start after the minimal player count has been reached
+    ShortTimer = 10000, -- 10 seconds, after which the match will start if the maximum player count has been reached
 };
 
 return Config;
