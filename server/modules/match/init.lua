@@ -147,8 +147,11 @@ function Module:RemovePlayer(source)
     local player = Players:Get(source);
     local wasDead = player and not player.alive;
 
-    if State:IsActive() and not wasDead then
-        Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+    if State:IsActive() then
+        if not wasDead then
+            Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+        end;
+
         Inventory:GiveItems(source, Loadout:GetItems(player.loadout));
     end;
 
