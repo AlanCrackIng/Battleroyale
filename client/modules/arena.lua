@@ -23,6 +23,18 @@ function Module:TeleportToArena()
     SetEntityHeading(ped, spawn.w);
 end;
 
+---@param radius number
+---@return void
+function Module:UpdateBoundary(radius)
+    self:RemoveBoundary();
+
+    self.State.Zone = Sphere:CreateSphereZone(Config.Arena.center, radius, function()
+        self:TeleportToArena();
+    end);
+
+    self.State.Zone:SetDebugMode(Config.Arena.debug);
+end;
+
 ---@return void
 function Module:CreateBoundary()
     self:RemoveBoundary();
