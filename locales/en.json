@@ -17,5 +17,6 @@
     "finish_last_player_standing": "Last player standing! The battle royale is over.",
     "player_eliminated": "%s has been eliminated.",
     "player_eliminated_by": "%s was eliminated by %s.",
-    "death_you_died": "You have been eliminated."
+    "death_you_died": "You have been eliminated.",
+    "zone_shrinking": "The safe zone is shrinking!"
 }

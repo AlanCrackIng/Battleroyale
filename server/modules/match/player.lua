@@ -102,4 +102,17 @@ function Module:GetAll()
     return self.List;
 end;
 
+---@return table<number, BattleroyalePlayer>
+function Module:GetAlive()
+    local alive = {};
+
+    for source, player in pairs(self.List) do
+        if player.alive then
+            alive[source] = player;
+        end;
+    end;
+
+    return alive;
+end;
+
 return Module;

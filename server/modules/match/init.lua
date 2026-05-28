@@ -68,6 +68,8 @@ function Module:StartMatch()
         for source in pairs(Players:GetAll()) do
             Registry:Get(Events.Shrink):FireClient(source, radius);
         end;
+
+        Announcer:SendToPlayers(Players:GetAlive(), locale("zone_shrinking"));
     end);
 end;
 
