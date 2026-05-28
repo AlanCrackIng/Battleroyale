@@ -14,5 +14,8 @@
     "announce_no_players": "There are no battle royale players to announce to.",
     "finish_no_active_match": "There is no active battle royale to finish.",
     "finish_no_players": "There are no battle royale players to finish.",
-    "finish_last_player_standing": "Last player standing! The battle royale is over."
+    "finish_last_player_standing": "Last player standing! The battle royale is over.",
+    "player_eliminated": "%s has been eliminated.",
+    "player_eliminated_by": "%s was eliminated by %s.",
+    "death_you_died": "You have been eliminated."
 }

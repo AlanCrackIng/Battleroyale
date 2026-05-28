@@ -29,6 +29,15 @@ local Config = {};
 ---@field Enabled boolean
 ---@field Stages BattleroyaleShrinkStage[]
 
+---@class BattleroyaleConfigDeath
+---@field AnnounceEnabled boolean
+---@field AnnounceToAll boolean
+---@field CustomEvent string|false
+
+---@class BattleroyaleConfigSpectate
+---@field Enabled boolean
+---@field Duration number
+
 ---@class BattleroyaleConfig
 ---@field Arena BattleroyaleConfigArena
 ---@field Commands BattleroyaleConfigCommands
@@ -40,6 +49,8 @@ local Config = {};
 ---@field LobbyTimer number
 ---@field ShortTimer number
 ---@field Shrink BattleroyaleConfigShrink
+---@field Death BattleroyaleConfigDeath
+---@field Spectate BattleroyaleConfigSpectate
 
 ---@type BattleroyaleConfig
 Config = {
@@ -47,7 +58,7 @@ Config = {
         center = vec3(0.0, 0.0, 72.0), -- replace
         spawn = vec4(0.0, 0.0, 72.0, 0.0), -- replace
         radius = 100.0, -- replace
-        debug = true, -- replace
+        visible = true,
     },
 
     Commands = {
@@ -114,6 +125,17 @@ Config = {
             { radius = 50.0, delay = 60000 },
             { radius = 25.0, delay = 90000 },
         },
+    },
+
+    Death = {
+        AnnounceEnabled = true,
+        AnnounceToAll = true,
+        CustomEvent = "battleroyale:onPlayerDeath",
+    },
+
+    Spectate = {
+        Enabled = true,
+        Duration = 0, -- 0 = permanent until match ends, > 0 = seconds
     },
 };
 

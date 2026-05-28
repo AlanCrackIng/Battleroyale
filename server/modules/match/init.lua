@@ -8,6 +8,7 @@ local Announcer = require("server.modules.announcer");
 local State = require("server.modules.match.state");
 local Players = require("server.modules.match.player");
 local Shrink = require("server.modules.match.shrink");
+local Death = require("server.modules.match.death");
 
 local Module = {};
 Module.__index = Module;
@@ -25,6 +26,11 @@ end;
 ---@return number
 function Module:GetPlayerCount()
     return Players:GetCount();
+end;
+
+---@return number
+function Module:GetAliveCount()
+    return Players:GetAliveCount();
 end;
 
 ---@return boolean
@@ -99,31 +105,67 @@ function Module:AddPlayer(source)
 end;
 
 ---@param source number
+---@param killer number|nil
+---@return boolean, string|nil
+function Module:EliminatePlayer(source, killer)
+    if not State:IsActive() then
+        return false, locale("finish_no_active_match");
+    end;
+
+    if not Players:Exists(source) then
+        return false, locale("leave_not_in_match");
+    end;
+
+    local player = Players:Get(source);
+
+    if not player or not player.alive then
+        return false, nil;
+    end;
+
+    Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+    player.alive = false;
+
+    Death:AnnounceDeath(source, killer);
+    Death:HandleDeath(source, killer);
+
+    if Players:GetAliveCount() <= 1 then
+        self:Finish(locale("finish_last_player_standing"));
+
+        return true, nil;
+    end;
+
+    return true, nil;
+end;
+
+---@param source number
 ---@return boolean, string|nil
 function Module:RemovePlayer(source)
     if not Players:Exists(source) then
         return false, locale("leave_not_in_match");
     end;
 
-    if State:IsActive() then
-        local player = Players:Get(source);
+    local player = Players:Get(source);
+    local wasDead = player and not player.alive;
 
-        if player then
-            Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
-        end;
+    if State:IsActive() and not wasDead then
+        Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
     end;
 
-    Registry:Get(Events.Finish):FireClient(source);
+    if not wasDead then
+        Registry:Get(Events.Finish):FireClient(source);
+    end;
+
     Players:Remove(source);
 
     local count = Players:GetCount();
+    local aliveCount = Players:GetAliveCount();
 
     if count <= 0 then
         State:Reset();
     elseif State:IsQueuing() and count < Config.MinimumPlayers then
         State:CancelTimer();
         State:SetQueuing(false);
-    elseif State:IsActive() and count <= 1 then
+    elseif State:IsActive() and not wasDead and aliveCount <= 1 then
         self:Finish(locale("finish_last_player_standing"));
     end;
 
@@ -165,7 +207,10 @@ function Module:Finish(message)
         local player = Players:Get(source);
 
         if player then
-            Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+            if player.alive then
+                Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+            end;
+
             Registry:Get(Events.Finish):FireClient(source, message);
         end;
     end;

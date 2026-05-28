@@ -10,6 +10,16 @@ ServerEvents.Leave:Connect(function()
     Match:RemovePlayer(player);
 end);
 
+ServerEvents.Death:Connect(function(killer)
+    local player = source;
+
+    if killer and killer <= 0 then
+        killer = nil;
+    end;
+
+    Match:EliminatePlayer(player, killer);
+end);
+
 AddEventHandler("playerDropped", function()
     local player = source;
 

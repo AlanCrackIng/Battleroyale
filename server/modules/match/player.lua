@@ -25,6 +25,19 @@ function Module:Exists(source)
 end;
 
 ---@return number
+function Module:GetAliveCount()
+    local count = 0;
+
+    for _, player in pairs(self.List) do
+        if player.alive then
+            count = count + 1;
+        end;
+    end;
+
+    return count;
+end;
+
+---@return number
 function Module:GetCount()
     local count = 0;
 
