@@ -13,6 +13,8 @@ local Death = require("server.modules.match.death");
 local Module = {};
 Module.__index = Module;
 
+Module.CountdownTimers = {};
+
 ---@return boolean
 function Module:IsActive()
     return State:IsActive();
@@ -55,22 +57,99 @@ function Module:StartMatch()
     State:SetActive(true);
     State:CancelTimer();
 
-    for source in pairs(Players:GetAll()) do
-        local player = Players:Get(source);
+    local spawns = self:AssignSpawns();
 
-        if player then
-            Inventory:GiveItems(source, Loadout:GetItems(player.loadout));
-            Registry:Get(Events.Start):FireClient(source);
+    for source in pairs(Players:GetAll()) do
+        local ped = GetPlayerPed(source);
+        local spawn = spawns[source];
+
+        if spawn then
+            SetEntityCoords(ped, spawn.x, spawn.y, spawn.z, false, false, false, false);
+            SetEntityHeading(ped, spawn.w);
+            FreezeEntityPosition(ped, true);
         end;
+
+        Registry:Get(Events.Start):FireClient(source);
     end;
 
-    Shrink:Start(function(radius)
+    self:StartCountdown();
+
+    State:SetTimer(Config.Arena.FreezeDuration, function()
         for source in pairs(Players:GetAll()) do
-            Registry:Get(Events.Shrink):FireClient(source, radius);
+            local player = Players:Get(source);
+
+            if player then
+                Inventory:GiveItems(source, Loadout:GetItems(player.loadout));
+                FreezeEntityPosition(GetPlayerPed(source), false);
+            end;
         end;
 
-        Announcer:SendToPlayers(Players:GetAlive(), locale("zone_shrinking"));
+        Shrink:Start(function(radius)
+            for source in pairs(Players:GetAll()) do
+                Registry:Get(Events.Shrink):FireClient(source, radius);
+            end;
+
+            Announcer:SendToPlayers(Players:GetAlive(), locale("zone_shrinking"));
+        end);
     end);
+end;
+
+---@return table<number, vector4>
+function Module:AssignSpawns()
+    local positions = {};
+
+    for _, pos in ipairs(Config.Arena.Spawns) do
+        table.insert(positions, pos);
+    end;
+
+    for i = #positions, 2, -1 do
+        local j = math.random(1, i);
+        positions[i], positions[j] = positions[j], positions[i];
+    end;
+
+    local spawns = {};
+
+    for source in pairs(Players:GetAll()) do
+        if #positions <= 0 then
+            break;
+        end;
+
+        spawns[source] = table.remove(positions);
+    end;
+
+    return spawns;
+end;
+
+---@return void
+function Module:CancelCountdown()
+    for _, timer in pairs(self.CountdownTimers) do
+        timer:forceEnd(false);
+    end;
+
+    self.CountdownTimers = {};
+end;
+
+---@return void
+function Module:StartCountdown()
+    self:CancelCountdown();
+
+    local freezeMs = Config.Arena.FreezeDuration;
+
+    for _, seconds in ipairs(Config.Arena.CountdownIntervals) do
+        local delay = freezeMs - (seconds * 1000);
+
+        if delay >= 0 then
+            local timer = lib.timer(delay, function()
+                if not State:IsActive() then
+                    return;
+                end;
+
+                Announcer:SendToPlayers(Players:GetAlive(), locale("match_starting_in", seconds));
+            end);
+
+            table.insert(self.CountdownTimers, timer);
+        end;
+    end;
 end;
 
 ---@param source number
@@ -222,6 +301,7 @@ function Module:Finish(message)
     end;
 
     Shrink:Stop();
+    self:CancelCountdown();
     State:Reset();
     Players:Clear();
 

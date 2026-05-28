@@ -2,9 +2,11 @@ local Config = {};
 
 ---@class BattleroyaleConfigArena
 ---@field center vector3
----@field spawn vector4
 ---@field radius number
 ---@field debug boolean
+---@field Spawns vector4[]
+---@field FreezeDuration number
+---@field CountdownIntervals number[]
 
 ---@class BattleroyaleConfigCommands
 ---@field Join string
@@ -56,9 +58,16 @@ local Config = {};
 Config = {
     Arena = {
         center = vec3(0.0, 0.0, 72.0), -- replace
-        spawn = vec4(0.0, 0.0, 72.0, 0.0), -- replace
         radius = 100.0, -- replace
-        visible = true,
+        debug = true, -- replace
+        Spawns = {
+            vec4(0.0, 0.0, 72.0, 0.0), -- replace
+            vec4(10.0, 10.0, 72.0, 90.0), -- replace
+            vec4(-10.0, -10.0, 72.0, 180.0), -- replace
+            vec4(15.0, -15.0, 72.0, 270.0), -- replace
+        },
+        FreezeDuration = 60000, -- ms, time between teleport and loadout
+        CountdownIntervals = { 60, 30, 10, 5, 4, 3, 2, 1 },
     },
 
     Commands = {
