@@ -63,11 +63,9 @@ function Module:StartMatch()
         local ped = GetPlayerPed(source);
         local spawn = spawns[source];
 
-        if spawn then
-            SetEntityCoords(ped, spawn.x, spawn.y, spawn.z, false, false, false, false);
-            SetEntityHeading(ped, spawn.w);
-            FreezeEntityPosition(ped, true);
-        end;
+        SetEntityCoords(ped, spawn.x, spawn.y, spawn.z, false, false, false, false);
+        SetEntityHeading(ped, spawn.w);
+        FreezeEntityPosition(ped, true);
 
         Registry:Get(Events.Start):FireClient(source);
     end;
@@ -98,7 +96,7 @@ end;
 function Module:AssignSpawns()
     local positions = {};
 
-    for _, pos in ipairs(Config.Arena.Spawns) do
+    for _, pos in pairs(Config.Arena.Spawns) do
         table.insert(positions, pos);
     end;
 
@@ -135,7 +133,7 @@ function Module:StartCountdown()
 
     local freezeMs = Config.Arena.FreezeDuration;
 
-    for _, seconds in ipairs(Config.Arena.CountdownIntervals) do
+    for _, seconds in pairs(Config.Arena.CountdownIntervals) do
         local delay = freezeMs - (seconds * 1000);
 
         if delay >= 0 then
