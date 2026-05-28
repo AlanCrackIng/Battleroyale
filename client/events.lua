@@ -9,5 +9,6 @@ ClientEvents.Announce = Event.new(Events.Announce):RegisterNetEvent();
 ClientEvents.Shrink = Event.new(Events.Shrink):RegisterNetEvent();
 ClientEvents.PlayerDied = Event.new(Events.PlayerDied):RegisterNetEvent();
 ClientEvents.Spectate = Event.new(Events.Spectate):RegisterNetEvent();
+ClientEvents.ZoneOut = Event.new(Events.ZoneOut):Register();
 
 return ClientEvents;
