@@ -19,6 +19,10 @@ ClientEvents.Finish:Connect(function(message)
     end;
 end);
 
+ClientEvents.Shrink:Connect(function(radius)
+    Arena:UpdateBoundary(radius);
+end);
+
 ClientEvents.Announce:Connect(function(message)
     lib.notify({
         title = locale("title"),

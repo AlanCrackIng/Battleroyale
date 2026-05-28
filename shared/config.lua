@@ -21,6 +21,14 @@ local Config = {};
 ---@field name string
 ---@field items BattleroyaleLoadoutItem[]
 
+---@class BattleroyaleShrinkStage
+---@field radius number
+---@field delay number
+
+---@class BattleroyaleConfigShrink
+---@field Enabled boolean
+---@field Stages BattleroyaleShrinkStage[]
+
 ---@class BattleroyaleConfig
 ---@field Arena BattleroyaleConfigArena
 ---@field Commands BattleroyaleConfigCommands
@@ -31,6 +39,7 @@ local Config = {};
 ---@field MaximumPlayers number
 ---@field LobbyTimer number
 ---@field ShortTimer number
+---@field Shrink BattleroyaleConfigShrink
 
 ---@type BattleroyaleConfig
 Config = {
@@ -97,6 +106,15 @@ Config = {
     MaximumPlayers = 30,
     LobbyTimer = 60000, -- 1 minute, after which the match will start after the minimal player count has been reached
     ShortTimer = 10000, -- 10 seconds, after which the match will start if the maximum player count has been reached
+
+    Shrink = {
+        Enabled = true,
+        Stages = {
+            { radius = 75.0, delay = 30000 },
+            { radius = 50.0, delay = 60000 },
+            { radius = 25.0, delay = 90000 },
+        },
+    },
 };
 
 return Config;
