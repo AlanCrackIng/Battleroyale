@@ -149,6 +149,7 @@ function Module:RemovePlayer(source)
 
     if State:IsActive() and not wasDead then
         Inventory:RemoveItems(source, Loadout:GetItems(player.loadout));
+        Inventory:GiveItems(source, Loadout:GetItems(player.loadout));
     end;
 
     if not wasDead then

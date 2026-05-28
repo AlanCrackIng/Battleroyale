@@ -32,7 +32,7 @@ function Module:UpdateBoundary(radius)
         self:TeleportToArena();
     end);
 
-    self.State.Zone:SetDebugMode(Config.Arena.debug);
+    self.State.Zone:SetDebugMode(Config.Arena.visible);
 end;
 
 ---@return void
@@ -43,7 +43,7 @@ function Module:CreateBoundary()
         self:TeleportToArena();
     end);
 
-    self.State.Zone:SetDebugMode(Config.Arena.debug);
+    self.State.Zone:SetDebugMode(Config.Arena.visible);
 end;
 
 ---@return void
